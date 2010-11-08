@@ -86,7 +86,9 @@ jasmine.Env.prototype.execute = function() {
 };
 
 jasmine.Env.prototype.describe = function(description, specDefinitions) {
-  var suite = new jasmine.Suite(this, description, specDefinitions, this.currentSuite);
+  var suite = new jasmine.Suite(this, description, function(){
+		require([description],specDefinitions);
+	}, this.currentSuite);
 
   var parentSuite = this.currentSuite;
   if (parentSuite) {
